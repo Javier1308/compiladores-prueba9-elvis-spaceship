@@ -277,8 +277,6 @@ Type GencodeVisitor::visit(StackOpExp* exp) {
     }
 }
 
-// left <=> right: deja -1, 0 o 1 en %rax. Los operandos se cargan como en un BinaryExp
-// (left en %rax, right en %rcx) y el resultado es (left > right) - (left < right)
 Type GencodeVisitor::visit(SpaceshipExp* exp) {
     if (exp->esConstante) {
         out << "movq $" << exp->valorConstante << ", %rax" << endl;
@@ -307,8 +305,6 @@ Type GencodeVisitor::visit(SpaceshipExp* exp) {
     return Type(0);
 }
 
-// left ?: right: evalúa left una sola vez; si es distinto de 0 queda en %rax,
-// si no se evalúa right en %rax
 Type GencodeVisitor::visit(ElvisExp* exp) {
     if (exp->esConstante) {
         out << "movq $" << exp->valorConstante << ", %rax" << endl;

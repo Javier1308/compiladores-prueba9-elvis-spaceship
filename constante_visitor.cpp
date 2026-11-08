@@ -120,7 +120,6 @@ Type ConstanteVisitor::visit(StackOpExp* exp) {
     return Type();
 }
 
-// left <=> right es constante si ambos operandos lo son
 Type ConstanteVisitor::visit(SpaceshipExp* exp) {
     exp->left->accept(this);
     exp->right->accept(this);
@@ -132,8 +131,6 @@ Type ConstanteVisitor::visit(SpaceshipExp* exp) {
     return Type();
 }
 
-// left ?: right es constante si left es una constante distinta de 0,
-// o si left es la constante 0 y right es constante
 Type ConstanteVisitor::visit(ElvisExp* exp) {
     exp->left->accept(this);
     exp->right->accept(this);

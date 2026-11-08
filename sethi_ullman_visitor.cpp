@@ -102,7 +102,6 @@ Type SethiUllmanVisitor::visit(StackOpExp* exp) {
     return Type();
 }
 
-// left <=> right: igual que un BinaryExp
 Type SethiUllmanVisitor::visit(SpaceshipExp* exp) {
     hijoDerecho = false;
     exp->left->accept(this);
@@ -115,7 +114,6 @@ Type SethiUllmanVisitor::visit(SpaceshipExp* exp) {
     return Type();
 }
 
-// left ?: right: cada operando se evalúa por separado en %rax, así que vale la mayor etiqueta
 Type SethiUllmanVisitor::visit(ElvisExp* exp) {
     hijoDerecho = false;
     exp->left->accept(this);

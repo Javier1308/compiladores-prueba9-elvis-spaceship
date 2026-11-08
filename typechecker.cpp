@@ -189,7 +189,6 @@ Type TypeChecker::visit(StackOpExp* exp) {
     }
 }
 
-// left <=> right: int <=> int -> int (-1, 0 o 1)
 Type TypeChecker::visit(SpaceshipExp* exp) {
     Type l = exp->left->accept(this);
     Type r = exp->right->accept(this);
@@ -200,7 +199,6 @@ Type TypeChecker::visit(SpaceshipExp* exp) {
     return Type(0);
 }
 
-// left ?: right: left y right del mismo tipo (int, bool o puntero) -> ese tipo
 Type TypeChecker::visit(ElvisExp* exp) {
     Type l = exp->left->accept(this);
     Type r = exp->right->accept(this);

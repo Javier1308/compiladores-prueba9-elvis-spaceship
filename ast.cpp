@@ -39,30 +39,24 @@ Exp* BinaryExp::clonar() {
     return new BinaryExp(left->clonar(), right->clonar(), op);
 }
 
-// Crea una comparación de tres vías left <=> right
 SpaceshipExp::SpaceshipExp(Exp* l, Exp* r) : left(l), right(r) {}
 
-// Libera los dos operandos
 SpaceshipExp::~SpaceshipExp() {
     delete left;
     delete right;
 }
 
-// Copia la comparación con copias de sus operandos
 Exp* SpaceshipExp::clonar() {
     return new SpaceshipExp(left->clonar(), right->clonar());
 }
 
-// Crea un elvis left ?: right
 ElvisExp::ElvisExp(Exp* l, Exp* r) : left(l), right(r) {}
 
-// Libera los dos operandos
 ElvisExp::~ElvisExp() {
     delete left;
     delete right;
 }
 
-// Copia el elvis con copias de sus operandos
 Exp* ElvisExp::clonar() {
     return new ElvisExp(left->clonar(), right->clonar());
 }

@@ -272,7 +272,7 @@ Stmt* Parser::parseStmt() {
     }
 }
 
-// CExp ::= RExp [ ?: CExp ]     (elvis: menor precedencia y asociativo a la derecha)
+// CExp ::= BExp [ (<= | < | > | >= | == | !=) BExp ]
 Exp* Parser::parseCExp() {
     Exp* l = parseRExp();
     if (match(Token::ELVIS)) {
@@ -282,7 +282,6 @@ Exp* Parser::parseCExp() {
     return l;
 }
 
-// RExp ::= SExp [ (<= | < | > | >= | == | !=) SExp ]
 Exp* Parser::parseRExp() {
     Exp* l = parseSExp();
     BinaryOp op;
@@ -297,7 +296,6 @@ Exp* Parser::parseRExp() {
     return new BinaryExp(l, r, op);
 }
 
-// SExp ::= BExp [ <=> BExp ]     (spaceship: más precedencia que las comparaciones)
 Exp* Parser::parseSExp() {
     Exp* l = parseBExp();
     if (match(Token::SPACESHIP)) {
@@ -341,7 +339,7 @@ Exp* Parser::parseExpr() {
     return l;
 }
 
-// term ::= '-' term | factor [ ** factor ]     (-e se arma como 0 - e)
+// term ::= factor [ ** factor ]
 Exp* Parser::parseTerm() {
     if (match(Token::MINUS)) {
         return new BinaryExp(new NumberExp(0), parseTerm(), MINUS_OP);

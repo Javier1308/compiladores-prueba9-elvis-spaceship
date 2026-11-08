@@ -154,7 +154,6 @@ public:
     ~StackOpExp();
 };
 
-// Operador spaceship: left <=> right vale -1 si left < right, 0 si son iguales y 1 si left > right
 class SpaceshipExp : public Exp {
 public:
     Exp* left;
@@ -165,8 +164,6 @@ public:
     ~SpaceshipExp();
 };
 
-// Operador elvis: left ?: right vale left si es distinto de 0 y right en otro caso.
-// left se evalúa una sola vez y right solo si hace falta
 class ElvisExp : public Exp {
 public:
     Exp* left;

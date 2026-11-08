@@ -132,7 +132,6 @@ Type ReduccionFuerzaVisitor::visit(StackOpExp* exp) {
     return Type();
 }
 
-// left <=> right: se reducen los dos operandos
 Type ReduccionFuerzaVisitor::visit(SpaceshipExp* exp) {
     exp->left = reemplazar(exp->left);
     exp->right = reemplazar(exp->right);
@@ -141,7 +140,6 @@ Type ReduccionFuerzaVisitor::visit(SpaceshipExp* exp) {
     return Type();
 }
 
-// left ?: right con left constante:  k ?: x -> k (k != 0)    0 ?: x -> x
 Type ReduccionFuerzaVisitor::visit(ElvisExp* exp) {
     exp->left = reemplazar(exp->left);
     string izquierda = variable;
@@ -152,12 +150,12 @@ Type ReduccionFuerzaVisitor::visit(ElvisExp* exp) {
     if (!exp->left->esConstante) return Type();
     if (exp->left->valorConstante != 0) {
         reemplazo = exp->left;
-        exp->left = nullptr;          // k sigue en el árbol: no se libera junto con el nodo
+        exp->left = nullptr;
         variable = izquierda;
     }
     else {
         reemplazo = exp->right;
-        exp->right = nullptr;         // x sigue en el árbol: no se libera junto con el nodo
+        exp->right = nullptr;
         variable = derecha;
     }
     return Type();
