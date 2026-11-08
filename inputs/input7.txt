@@ -1,0 +1,39 @@
+fun int main()
+    var int* valores;
+    var int i, umbral, diff;
+    var int menores, iguales, mayores;
+    valores = malloc(7 * 8);
+    valores[0] = 12;
+    valores[1] = 50;
+    valores[2] = 85;
+    valores[3] = 50;
+    valores[4] = 30;
+    valores[5] = 99;
+    valores[6] = 50;
+
+    umbral = 50;
+    menores = 0;
+    iguales = 0;
+    mayores = 0;
+
+    i = 0;
+    while i < 7 do
+        diff = valores[i] <=> umbral;
+        if diff == (0 - 1) then
+            menores = menores + 1
+        else
+            if diff == 0 then
+                iguales = iguales + 1
+            else
+                mayores = mayores + 1
+            endif
+        endif;
+        i = i + 1
+    enddo;
+
+    print(menores);
+    print(iguales);
+    print(mayores);
+
+    free(valores)
+endfun

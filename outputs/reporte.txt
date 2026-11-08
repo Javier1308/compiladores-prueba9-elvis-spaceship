@@ -1,0 +1,428 @@
+========================================
+input1.txt
+========================================
+Ejercicio:
+fun int signo(int n)
+    return n <=> 0
+endfun
+
+fun int safe_div(int a, int b, int defVal)
+    if b == 0 then
+        return defVal
+    else
+        return a / b
+    endif
+endfun
+
+fun int clamp(int v, int minV, int maxV)
+    if (v <=> minV) == -1 then
+        return minV
+    else
+        if (v <=> maxV) == 1 then
+            return maxV
+        else
+            return v
+        endif
+    endif
+endfun
+
+fun int main()
+    print(signo(0 - 25));
+    print(signo(0));
+    print(signo(42));
+    print(safe_div(100, 4, 999));
+    print(safe_div(100, 0, 999));
+    print(clamp(5, 10, 50));
+    print(clamp(25, 10, 50));
+    print(clamp(80, 10, 50))
+endfun
+
+TypeChecker: PASÓ (Typecheck exitoso)
+
+Resultado de input1.s:
+-1
+0
+1
+25
+999
+10
+25
+50
+
+========================================
+input2.txt
+========================================
+Ejercicio:
+fun int buscar(int* arr, int n, int target)
+    var int i, diff;
+    i = 0;
+    while i < n do
+        diff = arr[i] <=> target;
+        if diff == 0 then
+            return i + 1
+        endif;
+        i = i + 1
+    enddo;
+    return 0
+endfun
+
+fun int main()
+    var int* datos;
+    var int pos1, pos2, defPos;
+    datos = malloc(5 * 8);
+    datos[0] = 10;
+    datos[1] = 25;
+    datos[2] = 50;
+    datos[3] = 75;
+    datos[4] = 100;
+
+    pos1 = buscar(datos, 5, 50) ?: (0 - 1);
+    pos2 = buscar(datos, 5, 99) ?: (0 - 1);
+    defPos = buscar(datos, 5, 10) ?: 999;
+
+    print(pos1);
+    print(pos2);
+    print(defPos);
+
+    free(datos)
+endfun
+
+TypeChecker: PASÓ (Typecheck exitoso)
+
+Resultado de input2.s:
+3
+-1
+1
+
+========================================
+input3.txt
+========================================
+Ejercicio:
+fun int procesarPila(stack<int> s)
+    var int prev, curr, diff, balance;
+    balance = 0;
+    if s.empty() then
+        return 0
+    endif;
+    prev = s.pop();
+    while s.empty() == false do
+        curr = s.pop();
+        diff = prev <=> curr;
+        balance = balance + diff;
+        prev = curr
+    enddo;
+    return balance
+endfun
+
+fun int main()
+    var stack<int> s;
+    var int res1, res2;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    s.push(40);
+    res1 = procesarPila(s) ?: 999;
+    print(res1);
+
+    res2 = procesarPila(s) ?: 777;
+    print(res2)
+endfun
+
+TypeChecker: PASÓ (Typecheck exitoso)
+
+Resultado de input3.s:
+3
+777
+
+========================================
+input4.txt
+========================================
+Ejercicio:
+fun int comparar(int a, int b)
+    return a <=> b
+endfun
+
+fun int main()
+    var int* arr;
+    var int i, j, temp, n;
+    n = 5;
+    arr = malloc(n * 8);
+    arr[0] = 64;
+    arr[1] = 34;
+    arr[2] = 25;
+    arr[3] = 12;
+    arr[4] = 22;
+
+    i = 0;
+    while i < n - 1 do
+        j = 0;
+        while j < n - i - 1 do
+            if comparar(arr[j], arr[j + 1]) == 1 then
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp
+            endif;
+            j = j + 1
+        enddo;
+        i = i + 1
+    enddo;
+
+    i = 0;
+    while i < n do
+        print(arr[i]);
+        i = i + 1
+    enddo;
+
+    free(arr)
+endfun
+
+TypeChecker: PASÓ (Typecheck exitoso)
+
+Resultado de input4.s:
+12
+22
+25
+34
+64
+
+========================================
+input5.txt
+========================================
+Ejercicio:
+fun int get_val(int* v, int idx, int defVal)
+    var int x;
+    x = v[idx];
+    return x ?: defVal
+endfun
+
+fun int main()
+    var int* vec;
+    var int i, total, val;
+    vec = malloc(6 * 8);
+    i = 0;
+    while i < 6 do
+        vec[i] = 0;
+        i = i + 1
+    enddo;
+
+    vec[1] = 100;
+    vec[4] = 250;
+
+    total = 0;
+    i = 0;
+    while i < 6 do
+        val = get_val(vec, i, 10);
+        print(val);
+        total = total + val;
+        i = i + 1
+    enddo;
+    print(total);
+
+    free(vec)
+endfun
+
+TypeChecker: PASÓ (Typecheck exitoso)
+
+Resultado de input5.s:
+10
+100
+10
+10
+250
+10
+390
+
+========================================
+input6.txt
+========================================
+Ejercicio:
+fun int main()
+    var int c1, c2, c3, c4, c5;
+    c1 = (10 * 3) ?: 999;
+    c2 = (50 - 50) ?: (8 * 9);
+    c3 = (15 + 25) <=> (10 * 4);
+    c4 = ((20 * 2) <=> 40) ?: 777;
+    c5 = 0 ?: 0 ?: 0 ?: (30 <=> 10);
+    print(c1);
+    print(c2);
+    print(c3);
+    print(c4);
+    print(c5)
+endfun
+
+TypeChecker: PASÓ (Typecheck exitoso)
+
+Resultado de input6.s:
+30
+72
+0
+777
+1
+
+========================================
+input7.txt
+========================================
+Ejercicio:
+fun int main()
+    var int* valores;
+    var int i, umbral, diff;
+    var int menores, iguales, mayores;
+    valores = malloc(7 * 8);
+    valores[0] = 12;
+    valores[1] = 50;
+    valores[2] = 85;
+    valores[3] = 50;
+    valores[4] = 30;
+    valores[5] = 99;
+    valores[6] = 50;
+
+    umbral = 50;
+    menores = 0;
+    iguales = 0;
+    mayores = 0;
+
+    i = 0;
+    while i < 7 do
+        diff = valores[i] <=> umbral;
+        if diff == (0 - 1) then
+            menores = menores + 1
+        else
+            if diff == 0 then
+                iguales = iguales + 1
+            else
+                mayores = mayores + 1
+            endif
+        endif;
+        i = i + 1
+    enddo;
+
+    print(menores);
+    print(iguales);
+    print(mayores);
+
+    free(valores)
+endfun
+
+TypeChecker: PASÓ (Typecheck exitoso)
+
+Resultado de input7.s:
+2
+3
+2
+
+========================================
+input8.txt
+========================================
+Ejercicio:
+fun int resolver(int usuario, int grupo, int base, int defecto)
+    return usuario ?: grupo ?: base ?: defecto
+endfun
+
+fun int main()
+    var int c1, c2, c3, c4;
+    c1 = resolver(0, 0, 0, 100);
+    c2 = resolver(0, 0, 50, 100);
+    c3 = resolver(0, 25, 50, 100);
+    c4 = resolver(10, 25, 50, 100);
+    print(c1);
+    print(c2);
+    print(c3);
+    print(c4)
+endfun
+
+TypeChecker: PASÓ (Typecheck exitoso)
+
+Resultado de input8.s:
+100
+50
+25
+10
+
+========================================
+input9.txt
+========================================
+Ejercicio:
+fun int discrim(int a, int b, int c)
+    return (b ** 2) - 4 * a * c
+endfun
+
+fun int tipoRaices(int a, int b, int c)
+    var int d;
+    d = discrim(a, b, c);
+    return d <=> 0
+endfun
+
+fun int main()
+    var int t1, t2, t3;
+    t1 = tipoRaices(1, 0 - 4, 4);
+    t2 = tipoRaices(1, 0 - 5, 6);
+    t3 = tipoRaices(1, 2, 5);
+    print(t1);
+    print(t2);
+    print(t3)
+endfun
+
+TypeChecker: PASÓ (Typecheck exitoso)
+
+Resultado de input9.s:
+0
+1
+-1
+
+========================================
+input10.txt
+========================================
+Ejercicio:
+fun int clamp_score(int score, int defScore)
+    return score ?: defScore
+endfun
+
+fun int ranking(int* scores, int n)
+    var int i, totalDiff;
+    totalDiff = 0;
+    i = 0;
+    while i < n - 1 do
+        totalDiff = totalDiff + (scores[i] <=> scores[i + 1]);
+        i = i + 1
+    enddo;
+    return totalDiff
+endfun
+
+fun int main()
+    var int* tareas;
+    var int i, n, sum, r;
+    n = 5;
+    tareas = malloc(n * 8);
+
+    tareas[0] = 50;
+    tareas[1] = 0;
+    tareas[2] = 75;
+    tareas[3] = 0;
+    tareas[4] = 90;
+
+    sum = 0;
+    i = 0;
+    while i < n do
+        tareas[i] = clamp_score(tareas[i], 60);
+        sum = sum + tareas[i];
+        print(tareas[i]);
+        i = i + 1
+    enddo;
+    print(sum);
+
+    r = ranking(tareas, n);
+    print(r);
+
+    free(tareas)
+endfun
+
+TypeChecker: PASÓ (Typecheck exitoso)
+
+Resultado de input10.s:
+50
+60
+75
+60
+90
+335
+-2

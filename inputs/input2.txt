@@ -1,0 +1,33 @@
+fun int buscar(int* arr, int n, int target)
+    var int i, diff;
+    i = 0;
+    while i < n do
+        diff = arr[i] <=> target;
+        if diff == 0 then
+            return i + 1
+        endif;
+        i = i + 1
+    enddo;
+    return 0
+endfun
+
+fun int main()
+    var int* datos;
+    var int pos1, pos2, defPos;
+    datos = malloc(5 * 8);
+    datos[0] = 10;
+    datos[1] = 25;
+    datos[2] = 50;
+    datos[3] = 75;
+    datos[4] = 100;
+
+    pos1 = buscar(datos, 5, 50) ?: (0 - 1);
+    pos2 = buscar(datos, 5, 99) ?: (0 - 1);
+    defPos = buscar(datos, 5, 10) ?: 999;
+
+    print(pos1);
+    print(pos2);
+    print(defPos);
+
+    free(datos)
+endfun

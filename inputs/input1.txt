@@ -1,0 +1,34 @@
+fun int signo(int n)
+    return n <=> 0
+endfun
+
+fun int safe_div(int a, int b, int defVal)
+    if b == 0 then
+        return defVal
+    else
+        return a / b
+    endif
+endfun
+
+fun int clamp(int v, int minV, int maxV)
+    if (v <=> minV) == -1 then
+        return minV
+    else
+        if (v <=> maxV) == 1 then
+            return maxV
+        else
+            return v
+        endif
+    endif
+endfun
+
+fun int main()
+    print(signo(0 - 25));
+    print(signo(0));
+    print(signo(42));
+    print(safe_div(100, 4, 999));
+    print(safe_div(100, 0, 999));
+    print(clamp(5, 10, 50));
+    print(clamp(25, 10, 50));
+    print(clamp(80, 10, 50))
+endfun

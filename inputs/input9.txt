@@ -1,0 +1,19 @@
+fun int discrim(int a, int b, int c)
+    return (b ** 2) - 4 * a * c
+endfun
+
+fun int tipoRaices(int a, int b, int c)
+    var int d;
+    d = discrim(a, b, c);
+    return d <=> 0
+endfun
+
+fun int main()
+    var int t1, t2, t3;
+    t1 = tipoRaices(1, 0 - 4, 4);
+    t2 = tipoRaices(1, 0 - 5, 6);
+    t3 = tipoRaices(1, 2, 5);
+    print(t1);
+    print(t2);
+    print(t3)
+endfun

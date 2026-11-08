@@ -1,0 +1,4 @@
+fun int main()
+    print(2 ** 10);
+    print((8 - 2) / 3 == 2)
+endfun

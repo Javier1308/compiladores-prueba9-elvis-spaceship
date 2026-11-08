@@ -1,0 +1,9 @@
+fun int doble(int x)
+    return x * 2
+endfun
+
+fun int main()
+    var int a;
+    a = 8;
+    print(doble(a))
+endfun

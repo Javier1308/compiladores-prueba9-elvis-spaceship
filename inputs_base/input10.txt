@@ -1,0 +1,9 @@
+fun int cuadrado(int x)
+    return x * x
+endfun
+
+fun int main()
+    var int x;
+    x = 4;
+    print(cuadrado(3) + x * 1 + x * 2)
+endfun

@@ -1,0 +1,29 @@
+fun int procesarPila(stack<int> s)
+    var int prev, curr, diff, balance;
+    balance = 0;
+    if s.empty() then
+        return 0
+    endif;
+    prev = s.pop();
+    while s.empty() == false do
+        curr = s.pop();
+        diff = prev <=> curr;
+        balance = balance + diff;
+        prev = curr
+    enddo;
+    return balance
+endfun
+
+fun int main()
+    var stack<int> s;
+    var int res1, res2;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    s.push(40);
+    res1 = procesarPila(s) ?: 999;
+    print(res1);
+
+    res2 = procesarPila(s) ?: 777;
+    print(res2)
+endfun

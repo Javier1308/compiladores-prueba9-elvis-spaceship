@@ -1,0 +1,15 @@
+fun int resolver(int usuario, int grupo, int base, int defecto)
+    return usuario ?: grupo ?: base ?: defecto
+endfun
+
+fun int main()
+    var int c1, c2, c3, c4;
+    c1 = resolver(0, 0, 0, 100);
+    c2 = resolver(0, 0, 50, 100);
+    c3 = resolver(0, 25, 50, 100);
+    c4 = resolver(10, 25, 50, 100);
+    print(c1);
+    print(c2);
+    print(c3);
+    print(c4)
+endfun

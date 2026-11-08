@@ -1,0 +1,42 @@
+fun int clamp_score(int score, int defScore)
+    return score ?: defScore
+endfun
+
+fun int ranking(int* scores, int n)
+    var int i, totalDiff;
+    totalDiff = 0;
+    i = 0;
+    while i < n - 1 do
+        totalDiff = totalDiff + (scores[i] <=> scores[i + 1]);
+        i = i + 1
+    enddo;
+    return totalDiff
+endfun
+
+fun int main()
+    var int* tareas;
+    var int i, n, sum, r;
+    n = 5;
+    tareas = malloc(n * 8);
+
+    tareas[0] = 50;
+    tareas[1] = 0;
+    tareas[2] = 75;
+    tareas[3] = 0;
+    tareas[4] = 90;
+
+    sum = 0;
+    i = 0;
+    while i < n do
+        tareas[i] = clamp_score(tareas[i], 60);
+        sum = sum + tareas[i];
+        print(tareas[i]);
+        i = i + 1
+    enddo;
+    print(sum);
+
+    r = ranking(tareas, n);
+    print(r);
+
+    free(tareas)
+endfun

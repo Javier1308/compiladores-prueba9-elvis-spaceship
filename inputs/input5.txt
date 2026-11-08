@@ -1,0 +1,31 @@
+fun int get_val(int* v, int idx, int defVal)
+    var int x;
+    x = v[idx];
+    return x ?: defVal
+endfun
+
+fun int main()
+    var int* vec;
+    var int i, total, val;
+    vec = malloc(6 * 8);
+    i = 0;
+    while i < 6 do
+        vec[i] = 0;
+        i = i + 1
+    enddo;
+
+    vec[1] = 100;
+    vec[4] = 250;
+
+    total = 0;
+    i = 0;
+    while i < 6 do
+        val = get_val(vec, i, 10);
+        print(val);
+        total = total + val;
+        i = i + 1
+    enddo;
+    print(total);
+
+    free(vec)
+endfun
